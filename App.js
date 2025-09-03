@@ -62,50 +62,50 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>Calculadora</Text>
-      <Image source={iconCalculadora} style={styles.imagemCalculadora} />
+      <Text style={{ fontSize: 32, fontWeight: 'bold', marginBottom: 10, color: '#2a2a2a' }}>Calculadora</Text>
+      <Image source={require('./assets/calc.png')} style={styles.imagemCalculadora} />
 
-    <View style={styles.areabotoes}>
-      
-      <View style={styles.textoCampo}>
-        <Text>Primeiro valor</Text>
-        <TextInput keyboardType="decimal-pad" 
-        style={styles.campoTela}
-        value={valor1.toString()}
-        onChangeText={text => setValor1(text)} /> 
+      <View style={[styles.areabotoes, { flexDirection: 'column', alignItems: 'center', width: '90%' }]}>  
+        <View style={{ marginBottom: 10, width: '100%', alignItems: 'center' }}>
+          <Text style={styles.textoCampo}>Primeiro valor</Text>
+          <TextInput keyboardType="decimal-pad" 
+           style={[styles.campoTela, { alignSelf: 'center' }]}
+           value={valor1.toString()}
+           onChangeText={text => setValor1(text)} />
+        </View>
+
+        <View style={{ marginBottom: 10, width: '100%', alignItems: 'center' }}>
+          <Text style={styles.textoCampo}>Segundo valor</Text>
+          <TextInput keyboardType="decimal-pad" 
+           style={[styles.campoTela, { alignSelf: 'center' }]}
+           value={valor2.toString()}
+           onChangeText={text => setValor2(text)} />
+        </View>
+
+        <View style={[styles.areaselecao, { marginBottom: 20, width: '80%' }]}> 
+          <DropDownPicker
+            open={open}
+            value={value}
+            items={items}
+            setOpen={setOpen}
+            setValue={setValue}
+            setItems={setItems}
+            placeholder="Selecione"
+            style={{ borderColor: '#2a2a2a', borderWidth: 2 }}
+            dropDownContainerStyle={{ borderColor: '#2a2a2a' }}
+          />
+        </View>
+
+        <TouchableOpacity onPress={()=> calcular(value)} style={{ backgroundColor: '#4CAF50', padding: 12, borderRadius: 8, marginBottom: 10, width: '80%' }}>
+          <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 20, textAlign: 'center' }}>Calcular</Text>
+        </TouchableOpacity>
+
+        <Text style={{ fontSize: 22, marginVertical: 10, color: '#333' }}>Resultado: {resultado}</Text>
+
+        <TouchableOpacity onPress={() => limpar()} style={{ backgroundColor: '#f44336', padding: 10, borderRadius: 8, width: '80%' }}>
+            <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 18, textAlign: 'center' }}>Limpar</Text>
+        </TouchableOpacity>
       </View>
-
-      <View style={styles.areaselecao}>
-        <DropDownPicker
-          open={open}
-          value={value}
-          items={items}
-          setOpen={setOpen}
-          setValue={setValue}
-          setItems={setItems}
-          placeholder="Selecione"
-        />
-      </View>
-
-      <View style={styles.textoCampo}>
-        <Text>Segundo valor</Text>
-        <TextInput keyboardType="decimal-pad" 
-        style={styles.campoTela}
-        value={valor2.toString()} 
-        onChangeText={text => setValor2(text)} />
-      </View>
-
-      </View>
-
-      <TouchableOpacity onPress={()=> calcular(value)}>
-        <Text>Calcular</Text>
-      </TouchableOpacity>
-
-      <Text>Resultado: {resultado}</Text>
-
-      <TouchableOpacity onPress={() => limpar()}>
-          <Text>Limpar</Text>
-      </TouchableOpacity>
 
       <StatusBar style="auto" />
     </View>
